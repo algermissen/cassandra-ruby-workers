@@ -83,5 +83,5 @@ class SequentialCountingWorker < Worker
 end
 
 
-SimpleWorker.new(host,keyspace,workspace).run
+SequentialCountingWorker.new(host,keyspace,workspace).run
 
