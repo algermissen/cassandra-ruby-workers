@@ -17,14 +17,16 @@ Install the Datastax Cassandra Ruby driver. Currently this works best by downloa
 source from github and installing the gem from these sources directly.
 
 
-Place the script `worker.rb` in any directory on any number of hosts and start the script:
+Place any of the worker scripts in any directory on any number of hosts and provide a Cassandra host and keyspace as
+well as a workspace name for the worker coordination.
 
-    $ woker.rb --host <ip> --keyspace <keyspace> --workstate <workstate-name>
+    $ woker.rb --host <ip> --keyspace <keyspace> --workspace <orkspace-name>
 
 
 # The Scripts
 
-- worker.rb: Simple coordination of workers that need to do some work sequentially on a shared resource. Each work progress starts from a shared state and returns the next value for the shared state as a result of the work progress. The workers are not scheduled, but start work as soon as they akquire the lock. 
+- sequential_counting_worker.rb: Simple coordination of workers that need to do some work sequentially on a shared resource. Each work progress starts from a shared state and returns the next value for the shared state as a result of the work progress. The workers are not scheduled, but start work as soon as they akquire the lock. 
+- ...
 
 # Worker Patterns
 
