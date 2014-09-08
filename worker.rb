@@ -14,16 +14,19 @@ class Worker
     @logger = Logger.new(STDERR)
     @logger.level = Logger::INFO
 
-    @cluster = Cassandra.connect(hosts: [@host])
-    @session = @cluster.connect(keyspace)
-
-    # For some reason, timeuuid makes problems in the perpared query, use string for now
-    @worker_id = Cassandra::TimeUuid::Generator.new.next.to_s
-
     @logger.info("Started worker #{@worker_id}")
     @logger.info("Host:      #{@host}")
     @logger.info("Keyspace:  #{@keyspace}")
     @logger.info("Workspace: #{@workspace_id}")
+
+    @cluster = Cassandra.connect(hosts: [@host])
+    @session = @cluster.connect(keyspace)
+
+    @logger.info("Casandra connection established and got session")
+
+    # For some reason, timeuuid makes problems in the perpared query, use string for now
+    @worker_id = Cassandra::TimeUuid::Generator.new.next.to_s
+
 
     @session.execute(<<-CREATETABLE
       CREATE TABLE IF NOT EXISTS workspaces (

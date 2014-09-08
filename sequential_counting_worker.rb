@@ -45,6 +45,9 @@ class SequentialCountingWorker < Worker
     Signal.trap("INT") {
       trap_sigterm
     }
+    Signal.trap("TERM") {
+      trap_sigterm
+    }
 
     loop do
       if(!get_lock)
