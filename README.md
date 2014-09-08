@@ -26,7 +26,7 @@ well as a workspace name for the worker coordination.
 # The Scripts
 
 - sequential_counting_worker.rb: Simple coordination of workers that need to do some work sequentially on a shared resource. Each work progress starts from a shared state and returns the next value for the shared state as a result of the work progress. The workers are not scheduled, but start work as soon as they akquire the lock. 
-- ...
+- concurrent_worker.rb: Workers concurrently download the github Datastax ruby-river commit log. A given worker will take the current state as URI to download and store immediately the 'next' link as the current shared state for the next worker to pick it up. __After this__ the worker will download the body and process the commit log page (currently just count the bytes)
 
 # Worker Patterns
 
